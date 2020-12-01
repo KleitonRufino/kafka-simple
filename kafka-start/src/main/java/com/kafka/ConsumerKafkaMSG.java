@@ -21,7 +21,7 @@ public class ConsumerKafkaMSG {
 		properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
 		try (KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(properties)) {
-			consumer.subscribe(Arrays.asList("testejava"));
+			consumer.subscribe(Arrays.asList("users"));
 			while (true) {
 				ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
 				for (ConsumerRecord<String, String> record : records) {
