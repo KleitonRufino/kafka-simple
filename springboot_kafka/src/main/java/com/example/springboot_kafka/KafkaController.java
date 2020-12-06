@@ -1,6 +1,7 @@
 package com.example.springboot_kafka;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,8 @@ public class KafkaController {
 	}
 
 	@PostMapping(value = "/publish", consumes = "application/json")
-	public void sendMessageToKafkaTopic(@RequestBody Message message) {
-		this.producer.sendMessage(message.getMessage());
+	public ResponseEntity<?> sendMessageToKafkaTopic(@RequestBody User user) {
+		this.producer.sendMessage(user);
+		return ResponseEntity.ok().build();
 	}
 }

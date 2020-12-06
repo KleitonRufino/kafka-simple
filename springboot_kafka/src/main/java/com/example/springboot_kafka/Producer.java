@@ -1,5 +1,6 @@
 package com.example.springboot_kafka;
 
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,12 @@ public class Producer {
 	private String TOPIC;
 
 	@Autowired
-	private KafkaTemplate<String, String> template;
+	private KafkaTemplate<String, User> template;
 
-	public void sendMessage(String message) {
-		logger.info(String.format("#### -> Producing message -> %s", message));
-		this.template.send(TOPIC, message);
+	public void sendMessage(User user) {
+		logger.info(String.format("#### -> Producing message -> %s", user.toString()));
+		ProducerRecord<String, User> record = new ProducerRecord<String, User>(TOPIC, user);
+		this.template.send(record);
 	}
 
 }

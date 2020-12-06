@@ -14,7 +14,7 @@ public class Consumer {
 	private final Logger logger = LoggerFactory.getLogger(Producer.class);
 	
 
-	@KafkaListener(topics = "${topic.name.consumer}", groupId = "group_id")
+	@KafkaListener(topics = "${topic.name.consumer}", groupId = "${group.name.consumer}")
 	public void consume(ConsumerRecord<String, String> record) throws IOException {
 		logger.info("Tópico: " + record.topic());
 		logger.info("key: " + record.key());
